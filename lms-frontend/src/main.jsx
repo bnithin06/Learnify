@@ -12,6 +12,7 @@ import CourseDetailsPage from './components/Courses/CourseDetailsPage';
 import { AuthProvider } from './contexts/AuthContext';
 import { CourseProvider } from './contexts/CourseContext'; // Import CourseProvider
 import Session from './components/sessions/Session';
+import Dashboard from './components/Teacher/Dashboard';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Register />} />
               <Route path="session" element={<Session />} />
+              <Route path="teacher-dashboard" element={<Dashboard/>}/>
               <Route path="course-details/:slug" element={<CourseDetailsPage />} />
             </Route>
           </Routes>

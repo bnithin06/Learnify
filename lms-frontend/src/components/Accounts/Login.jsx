@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Login() {
   const { loginUser } = useContext(AuthContext);
+  
 
   return (
     <div className="flex justify-center items-center h-fit">
@@ -15,9 +16,9 @@ function Login() {
           </label>
           <input
             type="email"
-            name="email" // Change "username" to "email" here
-            id="email" // Also change "username" to "email" here
-            placeholder="Enter Email" // Adjust placeholder accordingly
+            name="email" 
+            id="email" 
+            placeholder="Enter Email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
