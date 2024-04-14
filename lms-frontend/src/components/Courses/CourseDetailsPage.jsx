@@ -6,6 +6,7 @@ import Spinner from '../../components/Spinner';
 import ErrorMessage from './ErrorMessage';
 import Login from '../../components/Accounts/Login';
 import { useNavigate } from 'react-router-dom';
+import { FaCheckCircle } from 'react-icons/fa';
 
 function CourseDetailsPage() {
     const [course, setCourse] = useState(null);
@@ -14,7 +15,9 @@ function CourseDetailsPage() {
     const { user } = useContext(AuthContext);
     const { slug } = useParams();
     const navigate = useNavigate();
+    const [lesson,setLesson]=useState(null);
 
+    // fetching course details
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -32,6 +35,29 @@ function CourseDetailsPage() {
 
         fetchData();
     }, [slug]);
+
+
+    // fetching lessons details corresponding to the courses
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            setError(null);
+
+            try {
+                const response = await axios.get(`http://localhost:8000/courses/lessons/${slug}`);
+                setLesson(response.data);
+                // console.log(lesson);
+            } catch (error) {
+                setError('Failed to lesson details. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [slug]);
+
+
 
     const handleEnroll = async () => {
         try {
@@ -73,13 +99,14 @@ function CourseDetailsPage() {
     }
 
     return (
-        <div>
+        <>
+        <div className=' bg-zinc-100 p-5'>
             {course ? (
                 <>
                 <h1 className='m-4  font-medium text-2xl'>{course.title}</h1>
-                <div className='flex flex-col md:flex-row m-4'>
+                <div className='flex flex-col md:flex-row m-4 '>
                     <div className=' w-1/2 '>
-                       <p>{course.description}</p> 
+                       <p className='mb-4'>{course.description}</p> 
                        <div>
                        <div className="flex items-center mb-4 mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -94,26 +121,38 @@ function CourseDetailsPage() {
                             <p className="text-gray-600">Duration: 10 weeks</p>
                          </div>
                          <div>
-                            <button onClick={handleEnroll} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Enroll Now</button>
+                            <button onClick={handleEnroll} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Enroll Now!</button>
                         </div>
                        </div>
                     </div>
                     <div className='flex items-start justify-center w-1/2'>
-                        <div className="w-fit h-fit bg-white p-3">
+                        <div className="w-fit h-fit p-3">
                             <iframe className="w-full h-full rounded-lg" src={`https://www.youtube.com/embed/${getVideoId(course.video_url)}`} frameBorder="0" allowFullScreen></iframe>
                         </div>
                     </div>
-                </div>
-
-
-                <div>
-                    <h1 className='text-center text-xl font-semibold'>Course Features</h1>
                 </div>
                 </>
             ) : (
                 <ErrorMessage message="No course found." />
             )}
         </div>
+        <div className='  p-4 '>
+            <h1 className=' ml-80 text-xl font-semibold mb-4'>What you will Learn ?</h1>
+                {lesson  ? (
+                    <div>
+                        {lesson.map((lesson) => (
+                            <div>
+                                <p key={lesson.id} className="flex text-xl  mb-5  ml-72 border-b w-fit">
+                                <FaCheckCircle className="mr-2 text-green-700" /> {lesson.title}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <ErrorMessage message="No lessons found"/>
+                )}
+        </div>
+        </>
     );
 }
 

@@ -19,6 +19,9 @@ class LessonListCreate(generics.ListCreateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
 
-class LessonDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Lesson.objects.all()
+class LessonList(generics.ListAPIView):
     serializer_class = LessonSerializer
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        return Lesson.objects.filter(course_id=course_id)
