@@ -1,12 +1,12 @@
-import { Route, Redirect } from 'react-router-dom'
-import { useContext } from 'react'
-import AuthContext from '../contexts/AuthContext'
+import { Navigate ,Outlet} from 'react-router-dom';
+import AuthContext from '../contexts/AuthContext';
+import { useContext } from 'react';
 
-const PrivateRoute = ({children, ...rest}) => {
-    let {user} = useContext(AuthContext)
-    return(
-        <Route {...rest}>{!user ? <Redirect to="/login" /> :   children}</Route>
-    )
+const PrivateRoutes = () => {
+  let {user} = useContext(AuthContext)
+  return(
+      user ? <Outlet/> : <Navigate to="/login"/>
+  )
 }
 
-export default PrivateRoute;
+export default PrivateRoutes
