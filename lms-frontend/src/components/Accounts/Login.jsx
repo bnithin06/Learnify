@@ -4,12 +4,15 @@ import AuthContext from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
 function Login() {
-  const { loginUser } = useContext(AuthContext);
+  const {error, loginUser } = useContext(AuthContext);
   
 
   return (
     <div className="flex justify-center items-center h-fit">
       <form onSubmit={loginUser} className="border-2  rounded px-8 pt-6 pb-8 mb-16 mt-16">
+      <div className='mb-6 text-red-400 text-xl font-semibold'>
+      {error && 'Invalid username or password'}
+      </div>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
             Email

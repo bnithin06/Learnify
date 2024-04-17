@@ -10,6 +10,7 @@ export const AuthProvider = ({children}) => {
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     let [loading, setLoading] = useState(true)
+    let [error,setError]=useState(false)
 
     const navigate = useNavigate();
 
@@ -28,9 +29,9 @@ export const AuthProvider = ({children}) => {
             setAuthTokens(data);
             setUser(jwt_decode(data.access));
             localStorage.setItem('authTokens', JSON.stringify(data));
-            navigate('/');
+            navigate('/')
         } else {
-            alert('Invalid email or password!');
+            setError(true)
         }
     }
     
@@ -39,7 +40,7 @@ export const AuthProvider = ({children}) => {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
-        // navigate('/login')
+        navigate('/')
     }
 
 
@@ -73,6 +74,7 @@ export const AuthProvider = ({children}) => {
         authTokens:authTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,
+        error:error,
     }
 
 

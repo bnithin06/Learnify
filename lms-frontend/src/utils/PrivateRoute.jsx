@@ -1,12 +1,34 @@
 import { Navigate ,Outlet} from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
 import { useContext } from 'react';
+import Navbar from '../components/Header/Navbar';
+import Footer from '../components/Footer/Footer';
+// import TeacherNavbar from '../components/Teacher/TeacherNavbar';
 
-const PrivateRoutes = () => {
+export const StudentRoutes = () => {
   let {user} = useContext(AuthContext)
   return(
-      user ? <Outlet/> : <Navigate to="/login"/>
+      user  && user.is_student ? 
+      <>
+      <Navbar />
+      <Outlet/>
+      <Footer />
+      </>
+       : <Navigate to="/login"/>
   )
 }
 
-export default PrivateRoutes
+export const TeacherRoutes = () => {
+  let {user} = useContext(AuthContext)
+  return(
+      user  && user.is_student ? 
+      <>
+      <Navbar />
+      <Outlet/>
+      <Footer />
+      </>
+       : <Navigate to="/login"/>
+  )
+}
+
+

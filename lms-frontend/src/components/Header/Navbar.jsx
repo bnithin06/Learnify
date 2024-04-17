@@ -10,69 +10,58 @@ function Navbar() {
         logoutUser();
     };
 
-    if (user && user.is_student) {
-        return (
-            <nav>
-                {/* Student Navbar */}
-                <div className="h-16 w-full border-b flex">
-                    <div className="w-96 flex items-center justify-start mx-4 text-black-400 text-3xl font-medium">
-                        Learnify
-                    </div>
-                    <div className="w-screen flex justify-evenly items-center flex-wrap hidden md:flex font-semibold">
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/">
-                            Home
-                        </NavLink>
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/courses">
-                            All Courses
-                        </NavLink>
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/enrollments">
-                            My Enrollments
-                        </NavLink>
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/session">
-                            All Sessions
-                        </NavLink>
-                        <div className="text-slate-600">Welcome! {user.first_name}</div>
-                        <button onClick={handleLogout} className="bg-blue-500 px-3 py-1 rounded-md text-white ml-2">Logout</button>
-                    </div>
+    return (
+        <nav>
+            <div className=" h-16 w-full border-b flex">
+                <div className=" w-96 flex items-center justify-start mx-4 text-black-400 text-3xl font-medium">
+                    Learnify
                 </div>
-            </nav>
-        );
-    } else if (user && user.is_teacher) {
-        return (
-            <TeacharNavbar/>
-        );
-    } else {
-        return (
-            <nav>
-                {/* Default Navbar for non-logged-in users */}
-                <div className="h-16 w-full border-b flex justify-between items-center">
-                    <div className="w-96 flex items-center justify-start mx-4 text-black-400 text-3xl font-medium">
-                        Learnify
-                    </div>
-                    <div className="w-screen flex justify-evenly items-center flex-wrap hidden md:flex font-semibold">
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/">
-                            Home
-                        </NavLink>
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/courses">
-                            All Courses
-                        </NavLink>
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/aboutus">
-                            About Us
-                        </NavLink>
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/contactus">
-                            Contact Us
-                        </NavLink>
-                        <Link to="/login" className="border-blue-500 border-2 px-2 rounded-md text-blue-600 mr-5">
-                            Sign In
-                        </Link>
-                        <Link to="/signup" className="bg-blue-500 px-3 py-1 rounded-md text-white ml-2">
-                            Sign Up
-                        </Link>
-                    </div>
+                <div className="w-screen flex justify-evenly items-center flex-wrap hidden md:flex font-semibold">
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} 
+                        to="/"
+                        >
+                        Home
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} 
+                        to="/courses"
+                        >
+                        All Courses
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} 
+                        to="/enrollments"
+                        >
+                        My Enrollments
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} 
+                        to="/session"
+                        >
+                        All Sessions
+                    </NavLink>
+                    {user ? (
+                        <>
+                            <div className=" text-slate-600">Welcome! {user.first_name}</div>
+                            <button onClick={handleLogout} className="bg-blue-500 px-3 py-1 rounded-md text-white ml-2">Logout</button>
+                        </>
+                    ) : (
+                        <div>
+                            <Link to="/login" className="border-blue-500 border-2 px-2 rounded-md text-blue-600 mr-5">
+                                Sign In
+                            </Link>
+                            <Link to="/signup" className="bg-blue-500 px-3 py-1 rounded-md text-white ml-2">
+                                Sign Up
+                            </Link>
+                        </div>
+                    )}
+
+
                 </div>
-            </nav>
-        );
-    }
+            </div>
+        </nav>
+    );
 }
 
 export default Navbar;

@@ -14,25 +14,28 @@ import { CourseProvider } from './contexts/CourseContext'; // Import CourseProvi
 import Session from './components/sessions/Session';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import Dashboard from './components/Teacher/Dashboard';
+import { StudentRoutes,TeacherRoutes } from './utils/PrivateRoute'; // Import PrivateRoutes
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <CourseProvider> {/* Wrap your application with CourseProvider */}
-          <Routes>
-            <Route path="" element={<App />}>
-              <Route index element={<Home />} />
-              <Route path="courses" element={<Courses />} />
-              <Route path="enrollments" element={<Enrollments />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<Register />} />
-              <Route path="session" element={<Session />} />
-              <Route path="course-details/:slug" element={<CourseDetailsPage />} />
-              <Route path='aboutus' element={<AboutUs/>}/>
-              <Route path='contactus' element={<ContactUs/>}/>
-            </Route>
-          </Routes>
+        <CourseProvider>
+        <Routes>
+        <Route path="/" element={<StudentRoutes />}>
+          <Route index element={<Home />} />
+          <Route path='/courses' element={<Courses/>}/>
+          <Route path="enrollments" element={<Enrollments />} />
+          <Route path="signup" element={<Register />} />
+          <Route path="session" element={<Session />} />
+          <Route path="course-details/:slug" element={<CourseDetailsPage />} />
+        </Route>
+        <Route path="/teacher/*" element={<TeacherRoutes />}>
+          <Route index element={<Dashboard />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+       </Routes>
         </CourseProvider>
       </AuthProvider>
     </BrowserRouter>
