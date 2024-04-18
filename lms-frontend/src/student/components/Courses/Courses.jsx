@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import { useCourseContext } from '../../contexts/CourseContext'; // Import the useCourseContext hook
+import { useCourseContext } from '../../../contexts/CourseContext'; // Import the useCourseContext 
 
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../../contexts/AuthContext';
 import { useContext } from "react";
-import Login from '../../components/Accounts/Login';
+import Login from '../../../components/Accounts/Login';
 
 function Courses() {
   const { user } = useContext(AuthContext);
@@ -53,7 +53,7 @@ function Courses() {
                 <p className="text-gray-700 text-base">{course.short_description}</p>
               </div>
               <div className="px-6 py-4 underline text-blue-500 cursor-pointer">
-                <Link to={`/course-details/${course.slug}`}>Explore the curriculum</Link>
+              <Link to={`/student/course-details/${course.slug}`}>Explore the curriculum</Link>
               </div>
             </div>
           ))

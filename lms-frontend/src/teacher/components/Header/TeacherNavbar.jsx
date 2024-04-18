@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from "../../../contexts/AuthContext";
 import { useContext } from "react";
 
 function TeacherNavbar() {
@@ -17,10 +17,10 @@ function TeacherNavbar() {
                 </div>
                 
                 <div className="w-screen flex justify-evenly items-center flex-wrap hidden md:flex font-semibold">
-                <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/dashboard">
+                <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/teacher/dashboard">
                             Dashboard
                         </NavLink>
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/contactus">
+                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/teacher/contactus">
                             Contact Us
                         </NavLink>
                     <div className="flex items-center">

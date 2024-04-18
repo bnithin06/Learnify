@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../../contexts/AuthContext';
 import Spinner from '../../components/Spinner';
 import ErrorMessage from './ErrorMessage';
-import Login from '../../components/Accounts/Login';
+import Login from '../../../components/Accounts/Login';
 import { useNavigate } from 'react-router-dom';
 import { FaCheckCircle } from 'react-icons/fa';
 
