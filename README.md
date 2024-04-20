@@ -5,6 +5,7 @@ LMS is a web application designed to facilitate online learning by providing a p
 ## Technologies Used
 
 - **Frontend:** React.js
+- **Styling:** Tailwind css
 - **Backend:** Django
 - **Database:** MySQL
 - **Authentication:** JSON Web Token (JWT)
