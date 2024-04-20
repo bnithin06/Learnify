@@ -1,41 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import AuthContext from '../../../contexts/AuthContext';
+import axios from 'axios';
 
 function Enrollments() {
+    const { user } = useContext(AuthContext);
     const [enrolledCourses, setEnrolledCourses] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8000/enrollments/1/')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to fetch enrolled courses');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // console.log('Data received from API:', data);
-                setEnrolledCourses(data);
-            })
-            .catch(error => console.error('Error fetching enrolled courses:', error));
-    }, []);
+        if (user) {
+            axios.get(`http://localhost:8000/enrollments/${user.user_id}`)
+                .then(response => {
+                    setEnrolledCourses(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching enrolled courses:', error);
+                });
+        }
+    }, [user]); 
+
+    console.log(enrolledCourses);
 
     return (
         <div>
-            <h3>Enrolled Course Details</h3>
-            {enrolledCourses ? (
-                <ul>
-                    {Object.keys(enrolledCourses).map(key => (
-                        <li key={key}>
-                            <strong>{key}:</strong> {enrolledCourses[key]}
-                        </li>
-                    ))}
-                </ul>
+            {user ? (
+                <>
+                    <h3>Enrolled Course Details</h3>
+                    {enrolledCourses && enrolledCourses.map(enrollment => (
+                    <div key={enrollment.id}>
+                        <h4>Course: {enrollment.course.title}</h4>
+                        <p>Description: {enrollment.course.description}</p>
+                        <p>Instructor: {enrollment.course.instructor}</p>
+                        {/* Display other course details as needed */}
+                    </div>
+                ))}
+
+                </>
             ) : (
-                <p>No courses enrolled</p>
+                <p>Please log in to view enrollment details</p>
             )}
         </div>
     );
-    
-    
 }
 
 export default Enrollments;

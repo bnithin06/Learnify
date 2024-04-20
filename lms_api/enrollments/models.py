@@ -6,11 +6,12 @@ from courses.models import Course
 
 
 class Enroll(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrolls')
-    created_at = models.DateTimeField(default=now)
-    updated_at = models.DateTimeField(default=now)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='students')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE,related_name='courses')
+    enrollment_date = models.DateTimeField(default=now)
 
     class Meta:
-        # Define unique together constraint
-        unique_together = ['user', 'course']
+        unique_together = ('user', 'course')
+
+    def __str__(self):
+        return f'{self.user.username} enrolled in {self.course.title}'

@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
+import Footer from './components/Footer/Footer'
+import Navbar from './components/Header/Navbar'
 
 export default function App() {
   return (
     <>
-    <h1>This is Home Page</h1>
-    <Link to={'/login'}>Login</Link>
+    <Navbar/>
+    <Outlet/>
+    <Footer/>
     </>
   )
 }

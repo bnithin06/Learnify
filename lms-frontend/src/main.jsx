@@ -1,7 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Thome from './teacher/TeacherBase';
 import StudentBase from './student/StudentBase';
 import App from './App';
 import './index.css';
@@ -18,6 +17,9 @@ import CourseDetailsPage from './student/components/Courses/CourseDetailsPage';
 
 import Enrollments from './student/components/Enrollments/Enrollments'
 import Session  from './student/components/sessions/Session'
+import TeacherHomepage from './teacher/pages/TeacherHomepage';
+import GeneralHomepage from './pages/Homepage';
+import Register from './components/Accounts/Register';
 
 
 
@@ -26,12 +28,16 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <AuthProvider>
         <CourseProvider>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/teacher/*" element={<TeacherRoutes />} />
-            <Route path="/student/*" element={<StudentRoutes />} />
-            <Route path='/login' element={<Login/>}/>
-          </Routes>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<GeneralHomepage />} />
+            <Route path='/contactus' element={<ContactUs/>}/>
+            <Route path="/login" element={<Login />} />
+            <Route path='/signup' element={<Register/>}/>
+          </Route>
+          <Route path="/teacher/*" element={<TeacherRoutes />} />
+          <Route path="/student/*" element={<StudentRoutes />} />
+        </Routes>
         </CourseProvider>
       </AuthProvider>
     </BrowserRouter>
@@ -43,7 +49,7 @@ function TeacherRoutes() {
     <>
       <Routes>
         <Route path="/" element={<TeacherBase />}>
-        <Route index element={<Home/>}/>
+        <Route index element={<TeacherHomepage/>}/>
         <Route path='/dashboard' element={<TeacherDashboard/>}/>
         <Route path='/contactus' element={<ContactUs/>}/>
         </Route>
@@ -61,7 +67,7 @@ function StudentRoutes() {
           <Route path="/student-details" element={<Home />} />
           <Route path='/courses' element={<Courses/>}/>
           <Route path="course-details/:slug" element={<CourseDetailsPage />} />
-          <Route path="enrollments" element={<Enrollments />} />
+          <Route path="enrollments/" element={<Enrollments />} />
           <Route path="session" element={<Session />} />
         </Route>
       </Routes>

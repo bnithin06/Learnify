@@ -1,13 +1,17 @@
+import { FaUserCircle } from 'react-icons/fa';
 function Footer() {
     return (
-        <div className="bg-blue-900 w-full">
-            <div className="container mx-auto">
-                <div className="text-white flex items-center justify-center h-16 sm:h-20 mt-2">
-                    {/* Add footer content */}
-                    Learnify © 2024. All rights reserved.
-                </div>
-            </div>
+        <>
+        <footer className="bg-blue-900 text-white py-8">
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <p>&copy; 2024 Learnify</p>
+          <div className="flex space-x-4">
+            <a href="#" className="text-white hover:text-gray-300"><FaUserCircle className="h-6 w-6" /></a>
+            {/* Add social media links here */}
+          </div>
         </div>
+      </footer>
+        </>
     );
 }
 

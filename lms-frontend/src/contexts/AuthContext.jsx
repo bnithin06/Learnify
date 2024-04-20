@@ -29,11 +29,29 @@ export const AuthProvider = ({children}) => {
             setAuthTokens(data);
             setUser(jwt_decode(data.access));
             localStorage.setItem('authTokens', JSON.stringify(data));
-            navigate('/')
+            // navigate('/')
         } else {
             setError(true)
         }
     }
+
+    // return the page according the role of the user
+    useEffect(()=>{
+        if(user){
+            if(user.is_student){
+                navigate('/student');
+            }
+            else if(user.is_teacher){
+                navigate('/teacher');
+            }
+            else{
+                navigate('/');
+            }
+        }
+        else{
+            navigate('/')
+        }
+    },[user]);
     
 
     let logoutUser = () => {

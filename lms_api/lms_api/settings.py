@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'courses',
     'enrollments',
+    'student',
 ]
 
 
@@ -213,3 +214,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+

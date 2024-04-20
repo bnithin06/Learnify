@@ -10,26 +10,22 @@ function TeacherNavbar() {
     };
 
     return (
-        <nav>
-            <div className="h-16 w-full border-b flex">
-                <div className="w-96 flex items-center justify-start mx-4 text-black-400 text-3xl font-medium">
-                    Teacher Dashboard
-                </div>
-                
-                <div className="w-screen flex justify-evenly items-center flex-wrap hidden md:flex font-semibold">
-                <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/teacher/dashboard">
-                            Dashboard
-                        </NavLink>
-                        <NavLink className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} to="/teacher/contactus">
-                            Contact Us
-                        </NavLink>
-                    <div className="flex items-center">
-                        <div className="text-slate-600">Welcome! {user.first_name}</div>
-                        <button onClick={handleLogout} className="bg-blue-500 px-3 py-1 rounded-md text-white ml-2">Logout</button>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <header className="bg-white shadow-md">
+        <div className="container mx-auto py-4 px-6 flex justify-between items-center">
+          <div className="flex items-center">
+            <img src={'https://up.yimg.com/ib/th?id=OIP.cyJ8O7A-uvorQZjiHaiosQHaCQ&%3Bpid=Api&rs=1&c=1&qlt=95&w=319&h=97'} alt="Logo" className="h-11 mr-4" />
+            <nav className="space-x-4">
+              <Link to="/courses" className="text-gray-800 hover:text-gray-600">Courses</Link>
+              <Link to="/resources" className="text-gray-800 hover:text-gray-600">Resources</Link>
+              <Link to="/profile" className="text-gray-800 hover:text-gray-600">Profile</Link>
+            </nav>
+          </div>
+          <div>
+            <Link to="/login" className="text-gray-800 hover:text-gray-600">Login</Link>
+            <Link to="/signup" className="ml-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Sign up</Link>
+          </div>
+        </div>
+      </header>
     );
 }
 

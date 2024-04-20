@@ -15,13 +15,13 @@ function StudentNavbar() {
 
     return (
         <nav>
-            <div className="h-16 w-full border-b flex">
+            <div className=" h-20 w-full border-b flex">
                 <div className="w-96 flex items-center justify-start mx-4 text-black-400 text-3xl font-medium">
-                    Learnify
+                <img src={'https://up.yimg.com/ib/th?id=OIP.cyJ8O7A-uvorQZjiHaiosQHaCQ&%3Bpid=Api&rs=1&c=1&qlt=95&w=319&h=97'} alt="Logo" className="h-11 mr-4" />
                 </div>
-                <div className="w-screen flex justify-evenly items-center flex-wrap md:flex hidden font-semibold">
+                <div className="w-screen flex justify-evenly items-center flex-wrap md:flex hidden font-semibold ">
                     <NavLink 
-                        className={({ isActive }) => (isActive ? 'text-blue-600' : 'text-black')} 
+                        className={({ isActive }) => (isActive ? 'text-black' : 'text-black')} 
                         to="/student"
                     >
                         Home
