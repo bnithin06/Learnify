@@ -15,14 +15,27 @@ function TeacherNavbar() {
           <div className="flex items-center">
             <img src={'https://up.yimg.com/ib/th?id=OIP.cyJ8O7A-uvorQZjiHaiosQHaCQ&%3Bpid=Api&rs=1&c=1&qlt=95&w=319&h=97'} alt="Logo" className="h-11 mr-4" />
             <nav className="space-x-4">
-              <Link to="/courses" className="text-gray-800 hover:text-gray-600">Courses</Link>
-              <Link to="/resources" className="text-gray-800 hover:text-gray-600">Resources</Link>
-              <Link to="/profile" className="text-gray-800 hover:text-gray-600">Profile</Link>
+              <Link to="/courses" className="text-gray-800 hover:text-gray-600 font-medium">Courses</Link>
+              <Link to="/resources" className="text-gray-800 hover:text-gray-600 font-medium">Resources</Link>
+              <Link to="/profile" className="text-gray-800 hover:text-gray-600 font-medium">Profile</Link>
             </nav>
           </div>
-          <div>
-            <Link to="/login" className="text-gray-800 hover:text-gray-600">Login</Link>
-            <Link to="/signup" className="ml-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Sign up</Link>
+          <div className="flex  gap-3">
+          {user ? (
+                        <>
+                            <div className="text-slate-600 font-medium">Welcome! {user.first_name}</div>
+                            <button onClick={handleLogout} className="bg-blue-500 px-3 py-1 rounded-md text-white ml-2 font-medium">Logout</button>
+                        </>
+                    ) : (
+                        <div>
+                            <Link to="/login" className="border-blue-500 border-2 px-2 rounded-md text-blue-600 mr-5">
+                                Sign In
+                            </Link>
+                            <Link to="/signup" className="bg-blue-500 px-3 py-1 rounded-md text-white ml-2">
+                                Sign Up
+                            </Link>
+                        </div>
+                    )}
           </div>
         </div>
       </header>

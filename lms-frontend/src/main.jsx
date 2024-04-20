@@ -34,6 +34,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/contactus' element={<ContactUs/>}/>
             <Route path="/login" element={<Login />} />
             <Route path='/signup' element={<Register/>}/>
+            <Route path='/courses' element={<Courses/>}/>
           </Route>
           <Route path="/teacher/*" element={<TeacherRoutes />} />
           <Route path="/student/*" element={<StudentRoutes />} />

@@ -44,7 +44,7 @@ function StudentNavbar() {
                     >
                         All Sessions
                     </NavLink>
-                    {user ? (
+                    {user && user.is_student ? (
                         <>
                             <div className="text-slate-600">Welcome! {user.first_name}</div>
                             <button onClick={handleLogout} className="bg-blue-500 px-3 py-1 rounded-md text-white ml-2">Logout</button>

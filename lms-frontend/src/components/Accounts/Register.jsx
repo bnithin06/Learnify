@@ -5,16 +5,21 @@ import { Link } from 'react-router-dom';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const [error,setError]=useState(false);
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
     first_name: '',
     last_name: '',
+    isStudent: false,
+    isTeacher: false,
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -22,15 +27,15 @@ const RegisterForm = () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/accounts/register/', formData);
       // console.log(response.data);
-      navigate('/login'); // Use navigate instead of navigator
+      navigate('/login');
     } catch (error) {
-      console.error('Registration error:', error.response.data);
-      // Handle error, such as displaying error message to user
+      setError(true);
     }
   };
 
   return (
     <div className="max-w-sm mx-auto mt-8">
+      {error ? 'Registration failed! Try Again' : ''}
       <form onSubmit={handleSubmit} className="bg-white rounded px-8 pt-6 pb-8 mb-4">
         <div className="text-center text-blue-500 mb-4 underline font-medium">
           <Link to="/login">Existing User? Login</Link>
@@ -90,6 +95,37 @@ const RegisterForm = () => {
             onChange={handleChange}
             className="border-2 border-gray-400 rounded w-full px-3 py-2 focus:outline-none focus:border-blue-500"
           />
+        </div>
+        <div className="mb-4 flex gap-3">
+          <label className="block text-gray-700 font-bold mb-2">
+            Register as:
+          </label>
+          <div className="flex items-center">
+            <input
+              id="student"
+              type="checkbox"
+              name="isStudent"
+              checked={formData.isStudent}
+              onChange={handleChange}
+              className="mr-2 leading-tight"
+            />
+            <label htmlFor="student" className="text-sm">
+              Student
+            </label>
+          </div>
+          <div className="flex items-center">
+            <input
+              id="teacher"
+              type="checkbox"
+              name="isTeacher"
+              checked={formData.isTeacher}
+              onChange={handleChange}
+              className="mr-2 leading-tight"
+            />
+            <label htmlFor="teacher" className="text-sm">
+              Teacher
+            </label>
+          </div>
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
